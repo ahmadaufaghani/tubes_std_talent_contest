@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1732721200 source:c:\users\ahmad aufa ghani\downloads\c++\talentcontest_103012300001_103012330457\talentcontest.cpp
+	"talentContest.h"
+	<string>
+
+1732717806 c:\users\ahmad aufa ghani\downloads\c++\talentcontest_103012300001_103012330457\talentcontest.h
+	<iostream>
+
+1732721503 source:c:\users\ahmad aufa ghani\downloads\c++\talentcontest_103012300001_103012330457\main.cpp
+	<iostream>
+	"talentContest.h"
+
