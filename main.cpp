@@ -6,8 +6,10 @@ int main()
 {
     listJuri J;
     listPeserta P;
+    listRelasi R;
     createListJuri(J);
     createListPeserta(P);
+    createListRelasi(R);
     int inputPengguna = menuUtama();
     while(inputPengguna !=0) {
         if(inputPengguna == 1) {
@@ -48,6 +50,37 @@ int main()
                     pilihan = menuAplikasiAdmin();
                 }
             }
+        } else if (inputPengguna == 2) {
+            system("cls");
+            adrJuri autentikasi = loginJuri(J);
+            if(autentikasi) {
+                system("cls");
+                int inputJuri = menuJuri();
+                while(inputJuri!=0) {
+                    if(inputJuri == 1) {
+                        system("cls");
+                        cout<<"Juri: "<<info(autentikasi).nama<<endl;
+                        inputPenilaianPeserta(R,P,autentikasi);
+                    } else if(inputJuri == 2) {
+                        system("cls");
+                        cout<<"Juri: "<<info(autentikasi).nama<<endl;
+                        pesertaSudahDinilai(R,autentikasi);
+                    } else if(inputJuri == 3) {
+                        system("cls");
+                        cout<<"Juri: "<<info(autentikasi).nama<<endl;
+                        pesertaBelumDinilai(R,P,autentikasi);
+                    } else  if(inputJuri == 4) {
+                        adrRelasi X;
+                        system("cls");
+                        cout<<"Juri: "<<info(autentikasi).nama<<endl;
+                        deleteRelasi(R,autentikasi,X);
+                    }  else if(inputJuri == 5) {
+                        cout<<"Juri: "<<info(autentikasi).nama<<endl;
+                        updateRelasi(R,autentikasi);
+                    }
+                    inputJuri = menuJuri();
+                }
+            }
         }
         system("cls");
         inputPengguna = menuUtama();
@@ -58,3 +91,5 @@ int main()
     cout<<"==========================================="<<endl;
     return 0;
 }
+
+
