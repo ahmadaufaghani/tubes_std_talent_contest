@@ -36,6 +36,7 @@ adrPeserta cariPesertaNama(listPeserta LP, string namaPeserta) { // fungsi menca
         P = next(P);
     }
     return P;
+
 };
 
 adrJuri firstElementJuri(listJuri LJ){ // fungsi untuk mencari elemen pertama dari juri
@@ -587,7 +588,7 @@ int menuUtama() { // fungsi untuk memilih menu utama dan mengembalikan pilhan pe
 bool loginAdmin() { // fungsi untuk autentikasi admin dengan username dan password statis serta mengembalikan nilai dalam bentuk boolean
     string username, password;
     string defaultUsername = "admin";
-    string defaultPassword = "@dm1n123";
+    string defaultPassword = "123";
     cout<<"=================LOGIN ADMIN==============="<<endl;
     cout<<"==========================================="<<endl;
     cout<<"Username: ";
@@ -861,3 +862,133 @@ void updateRelasi(listRelasi &LR, adrJuri J) { // prosedur untuk memperbarui dat
     }
     cout<<endl;
 };
+
+
+void viewTotalNilaiPeserta(listPeserta LP, listRelasi LR) {
+    adrPeserta P = first(LP);
+    cout << "=================TOTAL NILAI PESERTA=================" << endl;
+
+
+    if (P == NULL) {
+        cout << "Tidak ada peserta yang terdaftar." << endl;
+        return;
+    }
+
+
+    while (P != NULL) {
+        string namaPeserta = info(P).nama;
+        int totalScore = 0;
+        cout << "Peserta: " << namaPeserta << endl;
+        cout << "Detail Penilaian:" << endl;
+
+        adrRelasi R = first(LR);
+        bool sudahDiNilai = false;
+
+
+        while (R != NULL) {
+            if (info(adrChild(R)).nama == namaPeserta) {
+                sudahDiNilai = true;
+                cout << "Juri: " << info(adrParent(R)).nama << " - Nilai: " << nilai(R) << endl;
+                totalScore += nilai(R);
+            }
+            R = next(R);
+        }
+
+
+        if (sudahDiNilai) {
+            cout << "Total Nilai: " << totalScore << endl;
+        } else {
+            cout << "Tidak ada penilaian untuk peserta ini." << endl;
+        }
+
+        cout << "=====================================================" << endl;
+        P = next(P);
+}
+}
+void viewDetailPenilaianJuri(listJuri LJ, listRelasi LR) {
+    adrJuri p = first(LJ);
+    cout << "=================DAFTAR DETAIL JURI=================" << endl;
+
+
+    if (p == NULL) {
+        cout << "Tidak ada juri yang terdaftar." << endl;
+        return;
+    }
+
+    while (p != NULL) {
+        string namaJuri = info(p).nama;
+        cout << "Juri: " << namaJuri << endl;
+        cout << endl;
+
+        bool sudahDiNilai = false;
+        adrRelasi r = first(LR);
+
+
+        while (r != NULL) {
+            if (info(adrParent(r)).nama == namaJuri) {
+                sudahDiNilai = true;
+                cout << "Nama Peserta: " << info(adrChild(r)).nama << endl;
+                cout << "Nilai Peserta: " << nilai(r) << endl;
+            }
+            r = next(r);
+        }
+
+
+        if (!sudahDiNilai) {
+            cout << "Belum ada yang dinilai." << endl;
+        }
+
+        cout << "=====================================================" << endl;
+        p = next(p);
+    }
+}
+
+int menuNonLoginUser() {
+    int pilihan;
+    cout << "=============== MENU PENGGUNA ===============" << endl;
+    cout << "1. Lihat Daftar Nilai Peserta" << endl;
+    cout << "0. Keluar" << endl;
+    cout << "=============================================" << endl;
+    cout << "Masukkan pilihan Anda: ";
+    cin >> pilihan;
+    return pilihan;
+}
+void showAllPeserta(listPeserta LP, listRelasi LR) {
+    adrPeserta P = first(LP);
+    cout << "=================DAFTAR PESERTA DAN TOTAL NILAI=================" << endl;
+
+
+    if (P == NULL) {
+        cout << "Tidak ada peserta yang terdaftar." << endl;
+        return;
+    }
+
+
+    while (P != NULL) {
+        string namaPeserta = info(P).nama;
+        int totalScore = 0;
+        cout << "Peserta: " << namaPeserta << endl;
+
+        adrRelasi R = first(LR);
+        bool sudahDinilai = false;
+
+
+        while (R != NULL) {
+            if (info(adrChild(R)).nama == namaPeserta) {
+                sudahDinilai = true;
+                totalScore += nilai(R);
+            }
+            R = next(R);
+        }
+
+
+        if (sudahDinilai) {
+            cout << "Total Nilai: " << totalScore << endl;
+        } else {
+            cout << "Belum ada penilaian untuk peserta ini." << endl;
+        }
+
+        cout << "=====================================================" << endl;
+        P = next(P);
+    }
+}

@@ -46,7 +46,14 @@ int main()
                     } else if(pilihan == 8) {
                         adrPeserta Q;
                         deletePeserta(P,Q);
+                    }else if(pilihan ==9){
+                        viewTotalNilaiPeserta(P,R);
+
+                    }else if(pilihan ==10){
+                        viewDetailPenilaianJuri(J,R);
+
                     }
+
                     pilihan = menuAplikasiAdmin();
                 }
             }
@@ -81,7 +88,23 @@ int main()
                     inputJuri = menuJuri();
                 }
             }
+        }else if (inputPengguna == 3) {
+    system("cls");
+    int pilih = -1;
+    while (pilih != 0) {
+        pilih = menuNonLoginUser ();
+        system("cls");
+
+        if (pilih == 1) {
+            showAllPeserta(P, R);
+        } else if (pilih == 0) {
+
+            cout << "Kembali ke menu utama..." << endl;
+        } else {
+            cout << "Pilihan tidak valid. Silakan coba lagi." << endl;
         }
+    }
+}
         system("cls");
         inputPengguna = menuUtama();
     }

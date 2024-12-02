@@ -108,5 +108,9 @@ void deleteRelasiLast(listRelasi &LR, adrRelasi &R);
 void deleteRelasiAfter(listRelasi &LR, adrRelasi prec, adrRelasi &R);
 void deleteRelasi(listRelasi &LR, adrJuri J, adrRelasi &R);
 void updateRelasi(listRelasi &LR, adrJuri J);
+void viewTotalNilaiPeserta(listPeserta LP, listRelasi LR);
+void viewDetailPenilaianJuri(listJuri LJ,listRelasi LR);
+int menuNonLoginUser();
+void showAllPeserta(listPeserta LP, listRelasi LR);
 
 #endif // TALENTCONTEST_H_INCLUDED
